@@ -4,7 +4,7 @@ use Core\Auth\DBAuth;
 
 if(!empty($_POST)){
 
-    
+    $message = [];
 
     $app = App::getInstance();
 
@@ -12,6 +12,8 @@ if(!empty($_POST)){
 
     if($auth->login($_POST['username'], $_POST['password'])){
         header('Location: admin.php');
+    }else{
+        $message['error'] = 'Oops! check your login details';
     }
 
     
@@ -23,16 +25,15 @@ $form =  new Form($_POST);
 
 <div class="row">
     <div class="col-md-6 offset-md-3">
-    <?php
+    <?php if(!empty($message)) foreach($message as $key=>$value){
 
-    if(!$auth->login($_POST['username'], $_POST['password'])){ ?>
+        if($key == 'error'){?>
 
-    <div class="alert alert-danger">
-        Wrong credentials
-    </div>
+        <div class="alert alert-danger"><?= $value ?></div>
 
-   <?php }
-    ?>
+        <?php }
+
+    }?>
         <div class="card">
   <div class="card-header">
     Featured

@@ -38,10 +38,18 @@ class MysqlDatabase extends Database{
 
     }
 
-    public function query($sql, $classname = null, $single = false){
+    public function query($stmt, $classname = null, $single = false){
 
-        $sql = $this->getPDO()->query($sql);
+        $sql = $this->getPDO()->query($stmt);
         //$res = $sql->setFetchMode(PDO::FETCH_CLASS, $classname);
+        if(
+            strpos($stmt, 'UPDATE') === 0 ||
+            strpos($stmt, 'INSERT') === 0 ||
+            strpos($stmt, 'DELETE') === 0 
+        ){
+            return $sql;
+        }
+        
 
         if($classname === null){
 
@@ -62,10 +70,18 @@ class MysqlDatabase extends Database{
         
     }
 
-    public function prepare($sql, $attr, $classname=null, $single = false){
+    public function prepare($stmt, $attr, $classname=null, $single = false){
 
-        $sql = $this->getPDO()->prepare($sql);
-        $sql->execute($attr);
+        $sql = $this->getPDO()->prepare($stmt);
+        $res = $sql->execute($attr);
+
+        if(
+            strpos($stmt, 'UPDATE') === 0 ||
+            strpos($stmt, 'INSERT') === 0 ||
+            strpos($stmt, 'DELETE') === 0 
+        ){
+            return $res;
+        }
         
 
         if($classname == null){
@@ -83,5 +99,9 @@ class MysqlDatabase extends Database{
 
 
         return $data;
+    }
+
+    public function lastInsertId(){
+        return $this->getPDO()->lastInsertId();
     }
 }

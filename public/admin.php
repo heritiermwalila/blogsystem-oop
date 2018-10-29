@@ -41,6 +41,30 @@ if($page === 'home'){
 }elseif($page === '404'){
     
     require ROOT . '/pages/404.php';
+}elseif($page === 'post.add'){
+
+    require ROOT . '/pages/admin/articles/add.php';
+    
+}elseif($page === 'post.delete'){
+
+    require ROOT . '/pages/admin/articles/delete.php';
+    
+}elseif($page === 'categories'){
+
+    require ROOT . '/pages/admin/categories/index.php';
+    
+}elseif($page === 'catedit'){
+
+    require ROOT . '/pages/admin/categories/edit.php';
+    
+}elseif($page === 'categories.delete'){
+
+    require ROOT . '/pages/admin/categories/delete.php';
+    
+}elseif($page === 'category.add'){
+
+    require ROOT . '/pages/admin/categories/add.php';
+    
 }
 
 

@@ -4,11 +4,11 @@ use Core\HTML\Form;
 
 $postTable  = App::getInstance()->getTable('post');
 
-$post = $postTable->find($_GET['id']);
+
 $categories = App::getInstance()->getTable('category')->ext('id', 'name');
 
 if(!empty($_POST)){
-    $result = $postTable->update($_GET['id'], [
+    $result = $postTable->create([
         'title'=>$_POST['title'],
         'content'=>$_POST['content'],
         'category_id'=>$_POST['category']
@@ -16,7 +16,9 @@ if(!empty($_POST)){
 
     if($result){ ?>
 
-    <div class="alert alert-success">Post has been updated...</div>
+    
+    <div class="alert alert-success">Post has been created...</div>
+    <?php header('Location: admin.php?p=edit&id=' . App::getInstance()->getDb()->lastInsertId()) ;?>
 
     <?php }
 
@@ -24,7 +26,7 @@ if(!empty($_POST)){
 }
 
 
-$form = new Form($post);
+$form = new Form($_POST);
 ?>
 
 <div class="row">
