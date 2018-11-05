@@ -9,7 +9,7 @@ class PostEntity extends Entity{
     
     public function getUrl(){
 
-        return 'index.php?p=post&id='. $this->postId;
+        return 'index.php?p=post.show&id='. $this->postId;
     }
 
     public function getExtrait(){

@@ -17,25 +17,21 @@ ob_start();
 
 if($page === 'home'){
 
-    require ROOT . '/pages/articles/index.php';
+    $controller = new App\Controller\PostsController;
+    $controller->index();
 
-}elseif($page === 'category'){
+}elseif($page === 'posts.category'){
+    $controller = new App\Controller\PostsController;
+    $controller->category();
 
-    require ROOT . '/pages/articles/categories.php';
-
-}elseif($page === 'post'){
-
-    require ROOT . '/pages/articles/posts.php';
+}elseif($page === 'post.show'){
+    $controller = new App\Controller\PostsController;
+    $controller->show();
     
 }elseif($page === '404'){
     
     require ROOT . '/pages/404.php';
 }elseif($page === 'login'){
-    
-    require ROOT . '/pages/users/login.php';
+    $controller = new App\Controller\UsersController;
+    $controller->login();
 }
-
-
-$content = ob_get_clean();
-
-require ROOT . '/pages/templates/default.php';

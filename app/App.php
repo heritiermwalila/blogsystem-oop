@@ -47,22 +47,7 @@ class App{
         return $this->db_instance;
     }
 
-    public function notFound(){
-        header('HTTP/1.0 Not Found');
-        header('Location:index.php?p=404');
-    }
-
-    public function setTitle($name){
-
-        $this->title = $name;
-
-        return $this->title;
-    }
-
-    public function forbidden(){
-        header('HTTP/1.0 403 Forbidden');
-        die('Access Denied...');
-    }
+    
 
     
 
